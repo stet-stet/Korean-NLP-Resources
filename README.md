@@ -66,6 +66,8 @@ en-ko 갯수가 빈약하기는 합니다. 언어 따라 다르겠지만, 대략
 
 * [LAZER](https://github.com/facebookresearch/LASER)를 이용한 어프로치. LAZER는 Facebookresearch에서 최근 발표한 라이브러리로 93개 언어에서 트레이닝된 인코더를 제공합니다. [위 말뭉치들 중 WikiMatrix가 LAZER를 이용해 만들어졌습니다](https://arxiv.org/abs/1907.05791).
 
+* [vecalign](https://github.com/thompsonb/vecalign) 와, 작정하고 조지네요. [논문](https://www.aclweb.org/anthology/D19-1136/) 결과는 해 보고 보고합니다.
+
 * [Unihan Database](https://unicode.org/charts/unihan.html) 다른 쪽 언어가 한자를 사용한다면 괜찮은 방법일 수 있습니다. Unihan database는 각 한자를 어떻게 읽는지(한국어, 일 음독, 일 훈독, 만다린 등등등), 뜻은 무엇인지, 간자/정자로는 어떻게 쓰는지에 대한 데이터를 담고 있습니다.
 
 * [JapaneseKoreanNouns](https://github.com/stet-stet/JapaneseKoreanNouns) 제가 만들어놓고 여기 넣기가 쪽팔리기는 한데, KAIST Corpus에 있던 명사 전부를 파파고에 넣고 일본어로 번역한 결과를 정리했습니다. 파파고 특성상 잘못 번역된 단어가 있을 수 있어 주의가 필요합니다.
