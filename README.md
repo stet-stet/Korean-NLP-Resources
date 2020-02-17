@@ -30,7 +30,7 @@ Treebank를 제공. POS 태깅이랑 비슷하면서도 꽤 다른데, 단순히
 한국어 단일언어 말뭉치가 필요하시면, 그냥 Parallel Corpus 받으신 다음에 추출해서 쓰는 것도 좋은 방법입니다. 근데 웹상의 자원을 무슨 마지막 한 톨까지 빨아먹을 특별한 이유가 있는 게 아니면 그냥 그러지 맙시다. 위에 있는 것만으로도 충분하실 것 같은데...
 
 * [TED Corpus](https://github.com/ajinkyakulkarni14/TED-Multilingual-Parallel-Corpus)
-Multilingual Parallel Corpus, Bilingual Parallel Corpus. 언어 따라 다르겠지만 최소 문장이 ~300k개는 된다고 보시면 됩니다.
+Multilingual Parallel Corpus, Bilingual Parallel Corpus. 설명만 보시면 되게 고퀄리티일 것 같지만, 밀려 있거나 불일치하는 부분이 엄청 많이 존재합니다. 이걸 쓰느니 WikiMatrix를 쓸 듯.
 
 * [WikiMatrix](https://github.com/facebookresearch/LASER/tree/master/tasks/WikiMatrix)
 특정 언어 페어에 대해선 쓸만한 문장쌍 갯수를 자랑합니다. ja-ko는 ~200k개. 다만 alignment가 완벽하지는 않으니 조심.
