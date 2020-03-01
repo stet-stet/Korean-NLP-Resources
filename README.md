@@ -19,7 +19,7 @@ Treebank를 제공. POS 태깅이랑 비슷하면서도 꽤 다른데, 단순히
 
 * [나무위키 데이터베이스 덤프](https://namu.wiki/w/%EB%82%98%EB%AC%B4%EC%9C%84%ED%82%A4:%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EB%8D%A4%ED%94%84?from=%EB%82%98%EB%AC%B4%EC%9C%84%ED%82%A4%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20%EB%8D%A4%ED%94%84)
 
-나무위키에서는 서버에 가하는 부담을 최소화하기 위해 .json 포맷의 데이터베이스 덤프를 제공하며, 압축을 풀면 용량은 10.7GB. 다운받을 때는 1.4GB라는 착한 용량을 자랑합니다.
+나무위키에서는 서버에 가하는 부담을 최소화하기 위해 .json 포맷의 데이터베이스 덤프를 제공하며, 압축을 풀면 용량은 10.7GB. 다운받을 때는 1.4GB라는 착한 용량을 자랑합니다. 이걸로 word2vec같은 거 트레이닝 하는 분도 보긴 봤는데 ...
 
 * [세종 말뭉치](https://ithub.korean.go.kr/user/guide/corpus/guide3.do) 
 
@@ -33,7 +33,7 @@ Treebank를 제공. POS 태깅이랑 비슷하면서도 꽤 다른데, 단순히
 Multilingual Parallel Corpus, Bilingual Parallel Corpus. 설명만 보시면 되게 고퀄리티일 것 같지만, 밀려 있거나 불일치하는 부분이 엄청 많이 존재합니다. 이걸 쓰느니 WikiMatrix를 쓸 듯.
 
 * [WikiMatrix](https://github.com/facebookresearch/LASER/tree/master/tasks/WikiMatrix)
-특정 언어 페어에 대해선 쓸만한 문장쌍 갯수를 자랑합니다. ja-ko는 ~200k개. 다만 alignment가 완벽하지는 않으니 조심.
+특정 언어 페어에 대해선 쓸만한 문장쌍 갯수를 자랑합니다. ja-ko는 ~200k개. 다만 alignment가 완벽하지는 않으니 조심. 점수가 너무 높거나 너무 낮으면 신뢰할 수 없는 alignment일 가능성이 큽니다. *만약 점수가 너무 높은데 틀린 애들 사이의 경향성을 발견하면 [제보합시다](https://github.com/facebookresearch/LASER/issues/129).* 그런 것들 빼고는 너무 좋습니다.
 
 * [tatoeba](http://www.manythings.org/anki/)
 en-ko 갯수가 빈약하기는 합니다. 언어 따라 다르겠지만, 대략 1k쌍 정도 뽑아낼 수 있다고 생각하시면 됩니다. 일단 겹치는 걸로만 ko-ja 뽑아봤는데 1k개 나옵니다.
@@ -54,19 +54,20 @@ en-ko 갯수가 빈약하기는 합니다. 언어 따라 다르겠지만, 대략
 * [soynlp](https://github.com/lovit/soynlp) 아직 안 돌려봤습니다. 명사 추출, 단어 추출, 토크나이징, POS 태깅, 벡터화(임베딩같은) 등등, 수많은 기능을 제공합니다. 설명만 봐서는 다른 언어에도 쓰일 수 있을 것 같은데 한 번 확인해보겠습니다.
 
 * [sentencepiece](https://github.com/google/sentencepiece/blob/master/python/README.md)
-비지도 학습을 통해서 "형태소"일만한 문자의 조합을 찾아냅니다. 오 엄청 빨리 돌아갑니다.
+비지도 학습을 통해서 "형태소"일만한 문자의 조합을 찾아냅니다. 오 CPU에서도 엄청 빨리 돌아갑니다. 
 
 # Alignment
 
 현재 눈에 쌍심지 켜고 찾아다니는 중입니다. 좋은 방법 아시는 분은 조언 부탁드리겠습니다.
 
 * [STACC 및 그 베리에이션들](http://lrec-conf.org/workshops/lrec2018/W8/pdf/6_W8.pdf) 필요조건: 이미 병렬 말뭉치를 보유하고 있을 것. 그걸 [GIZA++](https://github.com/moses-smt/giza-pp/tree/master/GIZA%2B%2B-v2)에 넣고 돌릴 수 있는 상황일 것. (대소문자 구분 등을 통해) 고유명사 등을 구별할 수 있는 상황일 것. BUCC2018 shared task에서 SoTA.
+ * GIZA++랑 sentencepiece랑 같이 써서 뭐가 뭐의 번역어인지 찾아내는 것까진 해 봤습니다. 빈도 떨어지는 단어, 점수 떨어지는 단어 거르고 나면 굉장히 만족스러운 결과가 나옵니다. 이 경우, sentencepiece가 제대로 된 형태소를 뱉도록 전처리하는 게 더 중요.
 
 * [Bilingual Embedding + Siamese BiRNN](https://arxiv.org/pdf/1806.05559v2.pdf) Bilingual Embedding은 어떻게 잘 train할 것
 
 * [LAZER](https://github.com/facebookresearch/LASER)를 이용한 어프로치. LAZER는 Facebookresearch에서 최근 발표한 라이브러리로 93개 언어에서 트레이닝된 인코더를 제공합니다. [위 말뭉치들 중 WikiMatrix가 LAZER를 이용해 만들어졌습니다](https://arxiv.org/abs/1907.05791).
 
-* [vecalign](https://github.com/thompsonb/vecalign) 와, 작정하고 조지네요. [논문](https://www.aclweb.org/anthology/D19-1136/) 결과는 해 보고 보고합니다.
+* [vecalign](https://github.com/thompsonb/vecalign) 와, 작정하고 조지네요. [논문](https://www.aclweb.org/anthology/D19-1136/) 와 이거 개쩔어 ㄷㄷㄷㄷㄷ LASER랑 합쳐서 쓰면 정말 가공할 성능을 발휘합니다. 0-1 alignment같은 노이즈를 골라내는 것도 너무 잘 합니다. DP 최고
 
 * [Unihan Database](https://unicode.org/charts/unihan.html) 다른 쪽 언어가 한자를 사용한다면 괜찮은 방법일 수 있습니다. Unihan database는 각 한자를 어떻게 읽는지(한국어, 일 음독, 일 훈독, 만다린 등등등), 뜻은 무엇인지, 간자/정자로는 어떻게 쓰는지에 대한 데이터를 담고 있습니다.
 
